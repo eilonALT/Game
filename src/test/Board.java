@@ -91,9 +91,9 @@ public class Board {
             for (int i = 0; i < length; i++) {
                 ArrayList<Tile> newWordTiles = new ArrayList<Tile>();
                 newWordTiles.add(tiles[i]);
-                checkLeft(row + i, col - 1, newWordTiles);
+                checkLeft(row + i, col, newWordTiles);
                 int newCol = col - newWordTiles.size() + 1;
-                checkRight(row + i, col + 1, newWordTiles);
+                checkRight(row + i, col, newWordTiles);
                 Word newWord = new Word(newWordTiles.toArray(new Tile[newWordTiles.size()]), row + i, newCol, false);
                 if (newWord.getTiles().length > 1 && boardLegal(newWord) && dictionaryLegal(newWord)
                         && !wordAlreadyOnTheBoard(newWord)) {
@@ -356,7 +356,7 @@ public class Board {
         }
         if (board[row][col - 1].getTile() != null) {
             // put the tile in the arraylist at the end
-            tiles.add(board[row][col - 1].getTile());
+            tiles.add(0, board[row][col - 1].getTile());
             checkLeft(row, col - 1, tiles);
         }
     }
@@ -367,7 +367,7 @@ public class Board {
         }
         if (board[row][col + 1].getTile() != null) {
             // put the tile in the arraylist at the start
-            tiles.add(0, board[row][col + 1].getTile());
+            tiles.add(board[row][col + 1].getTile());
             checkRight(row, col + 1, tiles);
         }
     }
@@ -473,23 +473,23 @@ public class Board {
     }
 
     private boolean doubleBonusLetter(int row, int col) {
-        if(row ==0 && (col == 3 || col == 11)) {
+        if (row == 0 && (col == 3 || col == 11)) {
             return true;
-        } else if(row == 2 && (col == 6 || col == 8)) {
+        } else if (row == 2 && (col == 6 || col == 8)) {
             return true;
-        } else if(row == 3 && (col == 0 || col == 7 || col == 14)) {
+        } else if (row == 3 && (col == 0 || col == 7 || col == 14)) {
             return true;
-        } else if(row == 6 && (col == 2 || col == 6 || col == 8 || col == 12)) {
+        } else if (row == 6 && (col == 2 || col == 6 || col == 8 || col == 12)) {
             return true;
-        } else if(row == 7 && (col == 3 || col == 11)) {
+        } else if (row == 7 && (col == 3 || col == 11)) {
             return true;
-        } else if(row == 8 && (col == 2 || col == 6 || col == 8 || col == 12)) {
+        } else if (row == 8 && (col == 2 || col == 6 || col == 8 || col == 12)) {
             return true;
-        } else if(row == 11 && (col == 0 || col == 7 || col == 14)) {
+        } else if (row == 11 && (col == 0 || col == 7 || col == 14)) {
             return true;
-        } else if(row == 12 && (col == 6 || col == 8)) {
+        } else if (row == 12 && (col == 6 || col == 8)) {
             return true;
-        } else if(row == 14 && (col == 3 || col == 11)) {
+        } else if (row == 14 && (col == 3 || col == 11)) {
             return true;
         }
         return false;
@@ -501,6 +501,46 @@ public class Board {
             return true;
         }
         return false;
+    }
+
+    public class BoardBox {
+        private Tile tile;
+        private boolean isOccupied;
+        private final int scoreBonus;
+
+        public BoardBox() {
+            this.tile = null;
+            this.isOccupied = false;
+            this.scoreBonus = 1;
+        }
+
+        public BoardBox(int scoreBonus) {
+            this.tile = null;
+            this.scoreBonus = scoreBonus;
+            this.isOccupied = false;
+        }
+
+        public Tile getTile() {
+            return tile;
+        }
+
+        public void setTile(Tile tile) {
+            this.tile = tile;
+            isOccupied = true;
+        }
+
+        public boolean isOccupied() {
+            return isOccupied;
+        }
+
+        public void setOccupied(boolean isOccupied) {
+            this.isOccupied = isOccupied;
+        }
+
+        public int getScoreBonus() {
+            return scoreBonus;
+        }
+
     }
 
 }
