@@ -97,22 +97,28 @@ public class MainTrain {
 
 	}
 
-	// public static void testIOSearch() throws Exception{
-	// String words1 = "the quick brown fox \n jumps over the lazy dog";
-	// String words2 = "A Bloom filter is a space efficient probabilistic data
-	// structure, \n conceived by Burton Howard Bloom in 1970";
-	// PrintWriter out = new PrintWriter(new FileWriter("text1.txt"));
-	// out.println(words1);
-	// out.close();
-	// out = new PrintWriter(new FileWriter("text2.txt"));
-	// out.println(words2);
-	// out.close();
+	public static void testIOSearch() throws Exception {
+		String words1 = "the quick brown fox \n jumps over the lazy dog";
+		String words2 = "A Bloom filter is a space efficient probabilistic data structure, \n conceived by Burton Howard Bloom in 1970";
+		PrintWriter out = new PrintWriter(new FileWriter("text1.txt"));
+		out.println(words1);
+		out.close();
+		out = new PrintWriter(new FileWriter("text2.txt"));
+		out.println(words2);
+		out.close();
 
-	// if(!IOSearcher.search("is", "text1.txt","text2.txt"))
-	// System.out.println("oyur IOsearch did not found a word (-5)");
-	// if(IOSearcher.search("cat", "text1.txt","text2.txt"))
-	// System.out.println("your IOsearch found a word that does not exist (-5)");
-	// }
+		if (!IOSearcher.search("is", "text1.txt", "text2.txt"))
+			System.out.println("oyur IOsearch did not found a word (-5)");
+		else {
+			System.out.println("your IOsearch found a word (+5)");
+		}
+		if (IOSearcher.search("cat", "text1.txt", "text2.txt"))
+			System.out.println("your IOsearch found a word that does not exist (-5)");
+		else {
+			System.out.println("your IOsearch did not found a word that does not exist (+5)");
+		}
+
+	}
 
 	// public static void testDictionary() {
 	// Dictionary d = new Dictionary("text1.txt","text2.txt");
@@ -127,11 +133,11 @@ public class MainTrain {
 		testLFU();
 		testCacheManager();
 		testBloomFilter();
-		// try {
-		// testIOSearch();
-		// } catch(Exception e) {
-		// System.out.println("you got some exception (-10)");
-		// }
+		try {
+			testIOSearch();
+		} catch (Exception e) {
+			System.out.println("you got some exception (-10)");
+		}
 		// testDictionary();
 		// System.out.println("done");
 	}
