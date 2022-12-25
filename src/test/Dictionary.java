@@ -11,7 +11,7 @@ public class Dictionary {
     private CacheManager nonExsistsWords;
     private BloomFilter bloomFilter;
 
-    public Dictionary(String... filesNames) throws FileNotFoundException {
+    public Dictionary(String... filesNames){
         this.filesNames = filesNames;
         this.exsistsWords = new CacheManager(400, new LRU());
         this.nonExsistsWords = new CacheManager(100, new LFU());
