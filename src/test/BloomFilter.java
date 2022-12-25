@@ -10,10 +10,10 @@ public class BloomFilter {
     private int size;// size of the bit array
     private String[] hashFunctions;// hash functions
 
-    public BloomFilter(int size, String alg1, String alg2) {
+    public BloomFilter(int size, String... hashFunctions) {
         this.size = size;
         bitSet = new BitSet();
-        this.hashFunctions = new String[] { alg1, alg2 };// initialize the hash
+        this.hashFunctions = hashFunctions;
     }
 
     public void add(String word) {

@@ -1,5 +1,6 @@
 package test;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
@@ -120,13 +121,25 @@ public class MainTrain {
 
 	}
 
-	// public static void testDictionary() {
-	// Dictionary d = new Dictionary("text1.txt","text2.txt");
-	// if(!d.query("is"))
-	// System.out.println("problem with dictionarry in query (-5)");
-	// if(!d.challenge("lazy"))
-	// System.out.println("problem with dictionarry in query (-5)");
-	// }
+	public static void testDictionary() {
+		Dictionary d;
+		try {
+			d = new Dictionary("text1.txt", "text2.txt");
+			if (!d.query("is"))
+				System.out.println("problem with dictionarry in query (-5)");
+			else {
+				System.out.println("dictionary query is correct (+5)");
+			}
+			if (!d.challenge("lazy"))
+				System.out.println("problem with dictionarry in query (-5)");
+			else {
+				System.out.println("dictionary challenge is correct (+5)");
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		testLRU();
@@ -138,7 +151,7 @@ public class MainTrain {
 		} catch (Exception e) {
 			System.out.println("you got some exception (-10)");
 		}
-		// testDictionary();
-		// System.out.println("done");
+		testDictionary();
+		System.out.println("done");
 	}
 }

@@ -6,12 +6,13 @@ import java.util.Scanner;
 
 public class IOSearcher {
 
-    public static boolean search(String word, String file1, String file2) {
-        if (searchInFile(word, file1) || searchInFile(word, file2)) {
-            return true;
+    public static boolean search(String word, String...files) {
+        for (String file : files) {
+            if (searchInFile(word, file)) {
+                return true;
+            }
         }
         return false;
-
     }
 
     private static boolean searchInFile(String word, String file) {
